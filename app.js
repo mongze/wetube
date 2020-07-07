@@ -10,6 +10,8 @@ import routes from './routes';
 
 const app = express()
 
+app.set('view engine', 'pug');
+// view 파일 위치
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
