@@ -4,7 +4,7 @@ export const videos = [
     title: 'Video awesome',
     description: 'This is something I love',
     views: 24,
-    videoFile: '',
+    videoFile: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
     creator: {
       id: 123432,
       name: 'jaejae',
@@ -16,7 +16,7 @@ export const videos = [
     title: 'Video super',
     description: 'This is something I love',
     views: 24,
-    videoFile: '',
+    videoFile: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
     creator: {
       id: 12355432,
       name: 'jaejae',
@@ -28,7 +28,7 @@ export const videos = [
     title: 'Video zzang',
     description: 'This is something I love',
     views: 24,
-    videoFile: '',
+    videoFile: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
     creator: {
       id: 198923432,
       name: 'jaejae',
@@ -40,7 +40,7 @@ export const videos = [
     title: 'Video good',
     description: 'This is something I love',
     views: 24,
-    videoFile: '',
+    videoFile: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
     creator: {
       id: 122473432,
       name: 'jaejae',
@@ -52,7 +52,7 @@ export const videos = [
     title: 'Video nice',
     description: 'This is something I love',
     views: 24,
-    videoFile: '',
+    videoFile: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
     creator: {
       id: 1234932,
       name: 'jaejae',
