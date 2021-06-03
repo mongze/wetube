@@ -4,7 +4,7 @@
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node init.js --delay 2",
+    "dev": "nodemon --exec babel-node src/init.js --delay 2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "eunjae kim",
@@ -13,7 +13,6 @@
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
-    "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
