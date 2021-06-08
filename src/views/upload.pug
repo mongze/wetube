@@ -6,7 +6,7 @@ block content
 
   .form-container
     form(action=`/videos${routes.upload}`, method="POST")
-      input(type="text", placeholder="Title", name="title")
-      input(type="text", name="description", placeholder="Description")
+      input(type="text", placeholder="Title", name="title", maxlength=80)
+      input(type="text", name="description", placeholder="Description", minlength=20)
       input(type="text", placeholder="hashtags, separated by comma.", name="hashtags")
       input(type="submit", value="Upload Video")
