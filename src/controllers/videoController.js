@@ -15,12 +15,20 @@ export const search = (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params; // const id = req.params.id;
   const video = await Video.findById(id);
+  // error 먼저
+  if (!video) {
+    return res.render('404', { pageTitle: 'Video not found' });
+  }
   return res.render('watch', { pageTitle: video.title, video });
 };
 
-export const getEdit = (req, res) => {
+export const getEdit = async (req, res) => {
   const { id } = req.params;
-  return res.render('editVideo', { pageTitle: `Editing` });
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render('404', { pageTitle: 'Video not found' });
+  }
+  return res.render('editVideo', { pageTitle: `Editing ${video.title}`, video });
 };
 
 export const postEdit = (req, res) => {
