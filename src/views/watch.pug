@@ -1,5 +1,9 @@
 extends layouts/main
 
 block content
-  //- h3 #{video.views} #{video.views === 1 ? "view" : "views"}
-  //- a(href=`${video.id}/edit`) Edit Video &rarr;
+  div
+    p=video.description
+    span=video.createdAt
+
+  div
+    a(href=`${video.id}/edit`) Edit Video &rarr;
