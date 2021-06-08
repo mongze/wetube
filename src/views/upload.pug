@@ -1,10 +1,12 @@
 extends layouts/main
 
 block content
+  if errorMessage
+    p=errorMessage
+
   .form-container
-    form(action=`/videos${routes.upload}`, method="post")
-      label(for="file") Video File
-      input(type="file", id="file", name="file")
+    form(action=`/videos${routes.upload}`, method="POST")
       input(type="text", placeholder="Title", name="title")
-      textarea(name="description", placeholder="Description")
+      input(type="text", name="description", placeholder="Description")
+      input(type="text", placeholder="hashtags, separated by comma.", name="hashtags")
       input(type="submit", value="Upload Video")

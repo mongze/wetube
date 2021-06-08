@@ -1,10 +1,8 @@
 extends layouts/main
-include mixins/videoBlock
+include mixins/video
 
 block content
-  h2 Welcome here you will see the trending videos
-
-  each video in videos
-    +videoBlock(video)
-  else
-    div Sorry, Nothing found.
+    each video in videos
+        +video(video)
+    else
+        div Sorry nothing found.
