@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import { localsMiddleware } from './middlewares';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
-import globalRouter from './routers/globalRouter';
+import rootRouter from './routers/rootRouter';
 import routes from './routes';
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true })); // form value를 이해할 수 
 
 app.use(localsMiddleware);
 
-app.use(routes.home, globalRouter);
+app.use(routes.home, rootRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
 

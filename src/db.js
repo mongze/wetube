@@ -4,6 +4,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/wetube', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  useCreateIndex: true,
 });
 // mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
 // access about connection between server and db server
