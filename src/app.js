@@ -24,8 +24,8 @@ app.use(express.urlencoded({ extended: true })); // form value를 이해할 수 
 app.use(
   session({
     secret: 'Hello',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/wetube' }),
   })
 );
