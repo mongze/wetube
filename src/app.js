@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import { localsMiddleware } from './middlewares';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
@@ -25,6 +26,7 @@ app.use(
     secret: 'Hello',
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/wetube' }),
   })
 );
 
