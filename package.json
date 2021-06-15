@@ -22,7 +22,9 @@
     "helmet": "^3.23.3",
     "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
-    "pug": "^3.0.0"
+    "node-fetch": "^2.6.1",
+    "pug": "^3.0.0",
+    "stylelint-config-standard": "^22.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
