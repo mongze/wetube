@@ -86,14 +86,30 @@ export const finishGithubLogin = async (req, res) => {
   ).json();
   if ('access_token' in tokenRequest) {
     const { access_token } = tokenRequest;
-    const userRequest = await (
-      await fetch('https://api.github.com/user', {
+    const apiUrl = 'https://api.github.com';
+    const userData = await (
+      await fetch(`${apiUrl}/user`, {
         headers: {
           Authorization: `token ${access_token}`,
         },
       })
     ).json();
-    console.log('✅', userRequest);
+    const emailData = await (
+      await fetch(`${apiUrl}/user/emails`, {
+        headers: {
+          Authorization: `token ${access_token}`,
+        },
+      })
+    ).json();
+    console.log('✅', userData);
+    console.log('✅', emailData);
+
+    const email = emailData.find((email) => email.primary === true && email.verified === true);
+
+    if (!email) {
+      return res.redirect('/login');
+    }
+    // 중복된 email 처리
   } else {
     return res.redirect('/login'); // error message 혹은 noti 주면 좋겠네
   }
