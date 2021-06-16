@@ -36,7 +36,7 @@ export const getLogin = (req, res) => res.render('login', { pageTitle: 'Login' }
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = 'Login';
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialLogin: false });
   const ok = await bcrypt.compare(password, user.password);
 
   if (!user) {
@@ -106,13 +106,10 @@ export const finishGithubLogin = async (req, res) => {
     if (!emailObj) {
       return res.redirect('/login');
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      return res.redirect('/');
-    } else {
-      const user = await User.create({
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
+      user = await User.create({
+        avatarUrl: userData.avatar_url,
         name: userData.name,
         username: userData.login,
         email: emailObj.email,
@@ -120,16 +117,20 @@ export const finishGithubLogin = async (req, res) => {
         socialOnly: true,
         location: userData.location,
       });
-      req.session.loggedIn = true;
-      req.session.user = user;
-      return res.redirect('/');
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect('/');
   } else {
     return res.redirect('/login'); // error message 혹은 noti 주면 좋겠네
   }
 };
 
-export const logout = (req, res) => res.render('logout', { pageTitle: 'Logout' });
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect('/');
+};
+
 export const users = (req, res) => res.render('users', { pageTitle: 'Users' });
 export const userDetail = (req, res) => res.render('userDetail', { pageTitle: 'User Detail' });
 export const editProfile = (req, res) => res.render('editProfile', { pageTitle: 'Edit Profile' });
