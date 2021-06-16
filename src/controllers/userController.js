@@ -101,15 +101,29 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log('✅', userData);
-    console.log('✅', emailData);
 
-    const email = emailData.find((email) => email.primary === true && email.verified === true);
-
-    if (!email) {
+    const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
+    if (!emailObj) {
       return res.redirect('/login');
     }
-    // 중복된 email 처리
+    const existingUser = await User.findOne({ email: emailObj.email });
+    if (existingUser) {
+      req.session.loggedIn = true;
+      req.session.user = existingUser;
+      return res.redirect('/');
+    } else {
+      const user = await User.create({
+        name: userData.name,
+        username: userData.login,
+        email: emailObj.email,
+        password: '',
+        socialOnly: true,
+        location: userData.location,
+      });
+      req.session.loggedIn = true;
+      req.session.user = user;
+      return res.redirect('/');
+    }
   } else {
     return res.redirect('/login'); // error message 혹은 noti 주면 좋겠네
   }
