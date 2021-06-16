@@ -9,7 +9,7 @@ header.header
         li
           a(href=routes.logout) Log out
         li
-          a(href='/my-profile') #{loggedInUser.name}의 Profile
+          a(href='/users/edit') #{loggedInUser.name}의 Edit Profile
       else 
         li
           a(href=routes.join) Join

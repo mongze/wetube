@@ -104,6 +104,7 @@ export const finishGithubLogin = async (req, res) => {
 
     const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
     if (!emailObj) {
+      // TODO: set notification (There's no verified email)
       return res.redirect('/login');
     }
     let user = await User.findOne({ email: emailObj.email });
@@ -131,7 +132,23 @@ export const logout = (req, res) => {
   return res.redirect('/');
 };
 
+export const getEdit = (req, res) => res.render('editProfile', { pageTitle: 'Edit Profile' });
+
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, email, username, location },
+    file,
+  } = req;
+  console.log(file);
+  const updatedUser = await User.findByIdAndUpdate(_id, { name, email, username, location });
+  req.session.user = updatedUser;
+  return res.redirect('/users/edit');
+};
+
 export const users = (req, res) => res.render('users', { pageTitle: 'Users' });
 export const userDetail = (req, res) => res.render('userDetail', { pageTitle: 'User Detail' });
-export const editProfile = (req, res) => res.render('editProfile', { pageTitle: 'Edit Profile' });
+
 export const changePassword = (req, res) => res.render('changePassword', { pageTitle: 'Change Password' });
