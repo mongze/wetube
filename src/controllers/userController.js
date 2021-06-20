@@ -137,12 +137,16 @@ export const getEdit = (req, res) => res.render('editProfile', { pageTitle: 'Edi
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
     file,
   } = req;
-  const updatedUser = await User.findByIdAndUpdate(_id, { name, email, username, location }, { new: true });
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { avatarUrl: file ? file.path : avatarUrl, name, email, username, location },
+    { new: true }
+  );
   req.session.user = updatedUser;
   // TODO: 수정하려는 정보가 무엇인지 판별
   // TODO: 이미 있는 user, email로 업데이트하려는지 확인

@@ -30,16 +30,9 @@ app.use(
   })
 );
 
-// app.use((req, res, next) => {
-//   console.log(res);
-//   req.sessionStore.all((error, sessions) => {
-//     console.log(sessions);
-//     next();
-//   });
-// });
-
 app.use(localsMiddleware);
 
+app.use('/uploads', express.static('uploads'));
 app.use(routes.home, rootRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
