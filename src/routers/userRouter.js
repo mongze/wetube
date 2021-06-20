@@ -9,14 +9,14 @@ import {
   startGithubLogin,
   finishGithubLogin,
 } from '../controllers/userController';
-import { protectorMiddleware, uploadFiles } from '../middlewares';
+import { protectorMiddleware, uploadFiles, publicOnlyMiddleware } from '../middlewares';
 
 const userRouter = express.Router();
 
-userRouter.get('/github/start', startGithubLogin);
-userRouter.get('/github/finish', finishGithubLogin);
+userRouter.get('/github/start', publicOnlyMiddleware, startGithubLogin);
+userRouter.get('/github/finish', publicOnlyMiddleware, finishGithubLogin);
 userRouter.route(routes.editProfile).all(protectorMiddleware).get(getEdit).post(uploadFiles.single('avatar'), postEdit); // avatar file 가져와 upload 폴더에 저장
-userRouter.get(routes.changePassword, changePassword);
+userRouter.get(routes.changePassword, protectorMiddleware, changePassword);
 userRouter.get(routes.userDetail, userDetail);
 
 export default userRouter;
