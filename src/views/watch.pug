@@ -2,6 +2,7 @@ extends layouts/main
 
 block content
   div
+    video(src="/" + video.fileUrl, controls)
     p=video.description
     span=video.createdAt
 

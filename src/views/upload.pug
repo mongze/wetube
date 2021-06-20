@@ -4,8 +4,10 @@ block content
   if errorMessage
     p=errorMessage
 
-  .form-container
-    form(action=`/videos${routes.upload}`, method="POST")
+  div
+    form(method="POST", enctype="multipart/form-data")
+      label(for="video") Video File
+      input(type="file", name="video", id="video", accept="video/*", required)
       input(type="text", placeholder="Title", name="title", maxlength=80)
       input(type="text", name="description", placeholder="Description", minlength=20)
       input(type="text", placeholder="hashtags, separated by comma.", name="hashtags")
