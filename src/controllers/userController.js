@@ -142,9 +142,10 @@ export const postEdit = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
-  console.log(file);
-  const updatedUser = await User.findByIdAndUpdate(_id, { name, email, username, location });
+  const updatedUser = await User.findByIdAndUpdate(_id, { name, email, username, location }, { new: true });
   req.session.user = updatedUser;
+  // TODO: 수정하려는 정보가 무엇인지 판별
+  // TODO: 이미 있는 user, email로 업데이트하려는지 확인
   return res.redirect('/users/edit');
 };
 

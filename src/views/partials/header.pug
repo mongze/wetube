@@ -7,6 +7,8 @@ header.header
         a(href=routes.home) home
       if loggedIn
         li
+          a(href='/videos/upload') Upload
+        li
           a(href=routes.logout) Log out
         li
           a(href='/users/edit') #{loggedInUser.name}의 Edit Profile
@@ -15,8 +17,6 @@ header.header
           a(href=routes.join) Join
         li
           a(href=routes.login) Login
-      li
-        a(href='/videos/upload') Upload
       li
         a(href=routes.search) Search
         
