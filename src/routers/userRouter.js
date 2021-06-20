@@ -5,7 +5,8 @@ import {
   userDetail,
   getEdit,
   postEdit,
-  changePassword,
+  getChangePassword,
+  postChangePassword,
   startGithubLogin,
   finishGithubLogin,
 } from '../controllers/userController';
@@ -16,7 +17,7 @@ const userRouter = express.Router();
 userRouter.get('/github/start', publicOnlyMiddleware, startGithubLogin);
 userRouter.get('/github/finish', publicOnlyMiddleware, finishGithubLogin);
 userRouter.route(routes.editProfile).all(protectorMiddleware).get(getEdit).post(uploadFiles.single('avatar'), postEdit); // avatar file 가져와 upload 폴더에 저장
-userRouter.get(routes.changePassword, protectorMiddleware, changePassword);
+userRouter.route(routes.changePassword).all(protectorMiddleware).get(getChangePassword).post(postChangePassword);
 userRouter.get(routes.userDetail, userDetail);
 
 export default userRouter;

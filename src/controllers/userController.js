@@ -36,7 +36,7 @@ export const getLogin = (req, res) => res.render('login', { pageTitle: 'Login' }
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = 'Login';
-  const user = await User.findOne({ username, socialLogin: false });
+  const user = await User.findOne({ username, socialOnly: false });
   const ok = await bcrypt.compare(password, user.password);
 
   if (!user) {
@@ -149,7 +149,41 @@ export const postEdit = async (req, res) => {
   return res.redirect('/users/edit');
 };
 
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly) {
+    return res.redirect('/');
+  }
+  return res.render('changePassword', { pageTitle: 'Change Password' });
+};
+
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+
+  if (!ok) {
+    return res.status(400).render('changePassword', {
+      pageTitle: 'Change Password',
+      errorMessage: 'The current password is incorrect',
+    });
+  }
+
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render('changePassword', {
+      pageTitle: 'Change Password',
+      errorMessage: 'The new password does not match the confirmation',
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  // req.session.user.password = user.password; // logout하니까!
+  return res.redirect('/logout');
+};
+
 export const users = (req, res) => res.render('users', { pageTitle: 'Users' });
 export const userDetail = (req, res) => res.render('userDetail', { pageTitle: 'User Detail' });
-
-export const changePassword = (req, res) => res.render('changePassword', { pageTitle: 'Change Password' });

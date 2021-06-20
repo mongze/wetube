@@ -10,5 +10,6 @@ block content
       input(type="text", placeholder="Username", name="username", required, value=loggedInUser.username)
       input(type="text", placeholder="Location", name="location", required, value=loggedInUser.location)
       input(type="submit", value="Update Profile")
-    a(href=`/users${routes.changePassword}`) Change Password
+    if !loggedInUser.socialOnly
+      a(href=`/users${routes.changePassword}`) Change Password
   
