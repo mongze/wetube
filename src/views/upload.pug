@@ -1,6 +1,9 @@
 extends layouts/main
 
 block content
+  div
+    button(type="button")#startBtn Start Recording
+
   if errorMessage
     p=errorMessage
 
@@ -12,3 +15,6 @@ block content
       input(type="text", name="description", placeholder="Description", minlength=20)
       input(type="text", placeholder="hashtags, separated by comma.", name="hashtags")
       input(type="submit", value="Upload Video")
+
+block scripts
+  script(src="/static/js/recorder.js")
