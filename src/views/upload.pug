@@ -2,8 +2,9 @@ extends layouts/main
 
 block content
   div
+    video#preview
     button(type="button")#startBtn Start Recording
-
+  
   if errorMessage
     p=errorMessage
 
