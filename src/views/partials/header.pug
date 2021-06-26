@@ -7,11 +7,13 @@ header.header
         a(href=routes.home) home
       if loggedIn
         li
+          a(href=`/users/${loggedInUser._id}`) My Profile
+        li
+          a(href='/users/edit') #{loggedInUser.name}의 Edit Profile
+        li
           a(href='/videos/upload') Upload
         li
           a(href=routes.logout) Log out
-        li
-          a(href='/users/edit') #{loggedInUser.name}의 Edit Profile
       else 
         li
           a(href=routes.join) Join

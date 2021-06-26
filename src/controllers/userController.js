@@ -190,4 +190,9 @@ export const postChangePassword = async (req, res) => {
 };
 
 export const users = (req, res) => res.render('users', { pageTitle: 'Users' });
-export const userDetail = (req, res) => res.render('userDetail', { pageTitle: 'User Detail' });
+
+export const userDetail = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id)
+  return res.render('userDetail', { pageTitle: user.name, user });
+}
