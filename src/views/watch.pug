@@ -4,10 +4,13 @@ block content
   div
     video(src="/" + video.fileUrl, controls)
     p=video.description
-    span=video.createdAt
-
+    time=video.createdAt
+    
   div
-    a(href=`${video.id}/edit`) Edit Video &rarr;
-
-  div
-    a(href=`${video.id}/delete`) Delete Video &rarr;
+    strong Uploaded by #{owner.name}
+  
+  if (String(video.owner) === String(loggedInUser._id)) 
+    div
+      a(href=`${video.id}/edit`) Edit Video &rarr;
+      a(href=`${video.id}/delete`) Delete Video &rarr;
+  
